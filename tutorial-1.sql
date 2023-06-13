@@ -201,11 +201,11 @@ VALUES
 
 -------e.)   Find all employees in the database who live in the same cities and on the same streets as do their managers.
 --------------i.) Using Queries:
-				SELECT emp.employee_name FROM tbl_Employee emp, tbl_Manages, tbl_Employee mgr WHERE emp.employee_name = tbl_Manages.employee_name AND tbl_Manages.manager_name = mgr.employee_name AND emp.city = mgr.city;
+				SELECT emp.employee_name FROM tbl_Employee emp, tbl_Manages, tbl_Employee mgr WHERE emp.employee_name = tbl_Manages.employee_name AND tbl_Manages.manager_name = mgr.employee_name AND emp.city = mgr.city AND emp.street = mgr.street;
 --------------ii.) Using Subqueries:
-				SELECT emp.employee_name FROM tbl_Employee emp WHERE emp.city IN (SELECT city FROM tbl_Employee WHERE tbl_Employee.employee_name IN (SELECT manager_name FROM tbl_Manages WHERE tbl_Manages.employee_name = emp.employee_name) );
+				SELECT emp.employee_name FROM tbl_Employee emp WHERE emp.city IN (SELECT city FROM tbl_Employee WHERE tbl_Employee.employee_name IN (SELECT manager_name FROM tbl_Manages WHERE tbl_Manages.employee_name = emp.employee_name) ) AND emp.street IN (SELECT street FROM tbl_Employee WHERE tbl_Employee.employee_name IN (SELECT manager_name FROM tbl_Manages WHERE tbl_Manages.employee_name = emp.employee_name));
 --------------iii.) Using Join
-				SELECT emp.employee_name FROM tbl_Employee emp JOIN tbl_Manages on emp.employee_name=tbl_Manages.employee_name JOIN tbl_Employee mgr on tbl_Manages.manager_name = mgr.employee_name WHERE emp.city = mgr.city;
+				SELECT emp.employee_name FROM tbl_Employee emp JOIN tbl_Manages on emp.employee_name=tbl_Manages.employee_name JOIN tbl_Employee mgr on tbl_Manages.manager_name = mgr.employee_name WHERE emp.city = mgr.city AND emp.street = mgr.street;
 
 
 
